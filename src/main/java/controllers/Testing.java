@@ -9,7 +9,7 @@ import org.ektorp.http.StdHttpClient;
 import org.ektorp.impl.StdCouchDbConnector;
 import org.ektorp.impl.StdCouchDbInstance;
 
-import models.Sofa;
+import models.Customer;
 import models.SofaRepository;
 
 
@@ -22,8 +22,8 @@ public class Testing {
 				CouchDbInstance dbInstance = new StdCouchDbInstance(httpClient);
 				CouchDbConnector db = dbInstance.createConnector("thing", true);
 								
-				Sofa ektorp = new Sofa();
-				ektorp.setColor("red");
+				Customer ektorp = new Customer();
+				ektorp.setName("John Doe");
 				
 				db.create(ektorp);
 				

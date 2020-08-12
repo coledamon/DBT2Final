@@ -5,12 +5,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Sofa {
+public class Customer {
 
         
         @JsonProperty("_id") private String id;
         @JsonProperty("_rev") private String revision;
-        private String color;
+        private String name;
         
         
         public String getId() {
@@ -30,11 +30,11 @@ public class Sofa {
                 revision = s;
         }
 
-        public void setColor(String s) {
-                color = s;
+        public void setName(String s) {
+                name = s;
         }
         
-        public String getColor() {
-                return color;
+        public String getName() {
+                return name;
         }
 }
