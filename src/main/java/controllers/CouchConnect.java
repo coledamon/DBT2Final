@@ -19,7 +19,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import me.travja.utils.menu.Menu;
 import me.travja.utils.menu.MenuOption;
 import me.travja.utils.utils.IOUtils;
-import models.*;
+import models.Couch;
+import models.Customer;
+import models.Order;
+
 
 
 public class CouchConnect {
@@ -74,13 +77,35 @@ public class CouchConnect {
 			}),
 			new MenuOption("Search (Read)", () -> {
 				Customer c = db.find(Customer.class, IOUtils.promptForString("Enter the ID of the item you would like to find: "));
-				System.out.println(c);
+				if(c != null) {
+					System.out.println(c);
+				} else {
+					System.out.println("There is no customer with that ID in the database.");
+				}
 			}),
 			new MenuOption("Update", () -> {
-
+				Customer c = db.get(Customer.class, IOUtils.promptForString("Enter the ID of the item you would like to update: "));
+				do {
+					int orderSelection = 0;
+					int couchSelection = 0;
+					String updateField = IOUtils.promptForString("Enter the name of the field you would like to update (to access a field within orders or couches, use JSON object dot notation (customer.order.price): ");
+					if(updateField.contains(".orders.")) {
+						if(c.getOrders().size() > 0) {
+							if(c.getOrders().size() > 1) {
+								orderSelection = ConsoleIO.promptForMenuSelection("Which order would you like to update?", c.getOrders().toArray(new String[0]), false) - 1;
+							}
+							if(updateField.contains(".couches.")) {
+								if(c.getOrders().get(orderSelection).getCouches().size() > 1) {
+									couchSelection = ConsoleIO.promptForMenuSelection("Which couch would you like to update in that order?", c.getOrders().get(orderSelection).getCouches().toArray(new String[0]), false);
+								}
+							}
+						}
+					}
+				} while(IOUtils.promptForBoolean("Would you like to update another field?(y/n)", "y", "n"));
 			}),
 			new MenuOption("Delete", () -> {
-				
+				Customer c = db.get(Customer.class, IOUtils.promptForString("Enter the ID of the item you would like to delete: "));
+				db.delete(c);
 			}),
 			new MenuOption("Delete All", () -> {
 				deleteAll();

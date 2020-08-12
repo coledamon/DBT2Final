@@ -29,7 +29,7 @@ public class Couch {
 	
 	@Override
 	public String toString() {
-		return ("\t\tbrand: " + brand + "\n\t\tcouchType: " + couchType + "\n\t\tcouchColor: " + couchColor + "\n");
+		return ("brand: " + brand + "couchType: " + couchType + "couchColor: " + couchColor);
 	}
 
 }
