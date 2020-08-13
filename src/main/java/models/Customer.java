@@ -53,7 +53,7 @@ public class Customer {
 		
 		@Override
 		public String toString() {
-			return ("name: " + name + "\nbirthday: " + birthday + "\norders: \n" + orders + "\n");
+			return ("id: " + id + "\nname: " + name + "\nbirthday: " + birthday + "\norders: \n" + orders + "\n");
 		}
         
          

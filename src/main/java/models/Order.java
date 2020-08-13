@@ -47,7 +47,7 @@ public class Order {
 	
 	@Override
 	public String toString() {
-		return ("date: " + date + "couches: " + couches + "price: " + price + "tax: " + tax + "total: " + total);
+		return ("{date: " + date + ", couches: " + couches + ", price: " + price + ", tax: " + tax + ", total: " + total+"}\n");
 	}
 
 }

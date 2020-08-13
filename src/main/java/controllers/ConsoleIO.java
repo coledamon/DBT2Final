@@ -3,6 +3,7 @@ package controllers;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.List;
 
 public class ConsoleIO {
 
@@ -136,6 +137,34 @@ public class ConsoleIO {
 		StringBuilder sb = new StringBuilder(prompt);
 		for (int i = 0; i < options.length; i++) {
 			sb.append(i + 1).append(") ").append(options[i]).append("\n");
+		}
+		sb.append("\nEnter the number of your selection: ");
+		return sb.toString();
+	}
+	
+	public static int promptForMenuSelection(String prompt, List<String> options, boolean withQuit){
+		String menu = printOptions(prompt, options, withQuit);
+		if(withQuit) {
+			System.out.println("0) Exit");
+		}
+		return promptForInt(menu, withQuit ? 0 : 1, options.size());
+	}
+	
+	public static int promptForMenuSelection(String prompt, List<String> options, boolean withQuit, String customQuit){
+		String menu = printOptions(prompt, options, withQuit);
+		if(withQuit) {
+			System.out.println("0) " + customQuit);
+		}
+		return promptForInt(menu, withQuit ? 0 : 1, options.size());
+	}
+
+	private static String printOptions(String prompt, List<String> options, boolean withQuit) {
+		if(options == null || (options.size() == 0 && !withQuit)) {
+			throw new IllegalArgumentException("There must be at least one option to choose");
+		}
+		StringBuilder sb = new StringBuilder(prompt).append("\n");
+		for (int i = 0; i < options.size(); i++) {
+			sb.append(i + 1).append(") ").append(options.get(i)).append("\n");
 		}
 		sb.append("\nEnter the number of your selection: ");
 		return sb.toString();
